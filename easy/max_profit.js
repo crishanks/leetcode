@@ -4,17 +4,24 @@
 
 // Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 
+// var maxProfit = function(prices) {
+//   let result = 0;
+//   let currentNum = prices[0];
+//   for (let i = 1; i < prices.length; i++) {
+//     const currentCheckNum = prices[i];
+//     if (currentCheckNum > currentNum) {
+//       result += (currentCheckNum - currentNum); 
+//     }
+//     currentNum = currentCheckNum;
+//   }
+//   return result;
+// };
+
+//REFACTORED
 var maxProfit = function(prices) {
-  let result = 0;
-  let currentNum = prices[0];
-  for (let i = 1; i < prices.length; i++) {
-    const currentCheckNum = prices[i];
-    if (currentCheckNum > currentNum) {
-      result += (currentCheckNum - currentNum); 
-    }
-    currentNum = currentCheckNum;
-  }
-  return result;
+  return prices.reduce((result, currentValue, index, array) => {
+    return currentValue > array[index - 1] ? result += (currentValue - array[index - 1]) : result;
+  }, 0);
 };
 
 maxProfit([7,1,5,3,6,4]);
